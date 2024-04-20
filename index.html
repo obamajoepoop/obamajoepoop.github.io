@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Enter DRID</title>
+  <style>
+    body {
+      background-image: url('https://wallpapercave.com/wp/wp5910104.jpg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      font-family: sans-serif;
+    }
+    .drid-container {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 5px;
+      color: white;
+    }
+    .drid-text {
+      font-weight: bold;
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+    .submit-button {
+      background-color: #2e8b57;  /* Dark green */
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="drid-container">
+    <p class="drid-text">Enter DRID</p>
+    <input type="text" id="drid-input" placeholder="Enter your DRID here">
+    <button class="submit-button" id="submit-button">Submit</button>
+  </div>
+  <script>
+    const submitButton = document.getElementById('submit-button');
+    const dridInput = document.getElementById('drid-input');
+    const validDrid = "DFOIP"; // Special case for redirecting to a specific URL
+
+    submitButton.addEventListener('click', function() {
+      const enteredDrid = dridInput.value.toUpperCase();
+
+      if (enteredDrid === validDrid) {
+        // Redirect to the desired URL on successful match
+        window.location.href = "https://www.ipasigner.com/";
+      } else if (enteredDrid !== "DFIOP") {
+        alert("Invalid DRID. Please try again.");
+      }
+    });
+  </script>
+</body>
+</html>
