@@ -1,62 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Enter DRID</title>
-  <style>
-    body {
-      background-image: url('https://wallpapercave.com/wp/wp5910104.jpg');
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      font-family: sans-serif;
-    }
-    .drid-container {
-      background-color: rgba(0, 0, 0, 0.5);
-      padding: 20px;
-      border-radius: 5px;
-      color: white;
-    }
-    .drid-text {
-      font-weight: bold;
-      font-size: 1.2em;
-      margin-bottom: 10px;
-    }
-    .submit-button {
-      background-color: #2e8b57;  /* Dark green */
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank of America Demo</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #webview-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
-  <div class="drid-container">
-    <p class="drid-text">Enter DRID</p>
-    <input type="text" id="drid-input" placeholder="Enter your DRID here">
-    <button class="submit-button" id="submit-button">Submit</button>
-  </div>
-  <script>
-    const submitButton = document.getElementById('submit-button');
-    const dridInput = document.getElementById('drid-input');
-    const validDrid = "DFOIP"; // Special case for redirecting to a specific URL
-
-    submitButton.addEventListener('click', function() {
-      const enteredDrid = dridInput.value.toUpperCase();
-
-      if (enteredDrid === validDrid) {
-        // Redirect to the desired URL on successful match
-        window.location.href = "https://www.ipasigner.com/";
-      } else if (enteredDrid !== "DFIOP") {
-        alert("Invalid DRID. Please try again.");
-      }
-    });
-  </script>
+    <div id="webview-container">
+        <!-- WebView content will be loaded here -->
+    </div>
+    <script>
+        window.onload = function() {
+            var keyboardResponder = {
+                isVisible: false,
+                height: 0
+            };
+            
+            function updatePadding() {
+                var webview = document.getElementById('webview-container');
+                var paddingTop = -108;
+                var paddingBottom = keyboardResponder.isVisible ? keyboardResponder.height - 64 : -64;
+                webview.style.paddingTop = paddingTop + 'px';
+                webview.style.paddingBottom = paddingBottom + 'px';
+            }
+            
+            // Listen for keyboard events or other events that might change visibility or height
+            // and update the padding accordingly.
+            
+            // Example:
+            // document.addEventListener('resize', function() {
+            //     updatePadding();
+            // });
+            // document.addEventListener('keyboardchange', function(event) {
+            //     keyboardResponder.isVisible = event.isVisible;
+            //     keyboardResponder.height = event.height;
+            //     updatePadding();
+            // });
+            
+            // Load the WebView content
+            var urlString = "https://message.bankofamerica.com/onlinebanking_demo/mobileApp_Simulator/index.php";
+            var iframe = document.createElement('iframe');
+            iframe.src = urlString;
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            iframe.style.border = 'none';
+            document.getElementById('webview-container').appendChild(iframe);
+            
+            updatePadding();
+        };
+    </script>
 </body>
 </html>
